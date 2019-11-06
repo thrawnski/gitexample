@@ -20,7 +20,11 @@ for current_run = 1:settings.repetitions
 	comparison_stimulus = set_brightness(original_stimulus, settings.brightness(current_run))
 	
 	% show experiment screen
-	display_direct(original_stimulus, comparison_stimulus)
+	if strcmp(settings.display, 'opengl')
+		openglshow(original_stimulus, comparison_stimulus)
+	else	
+		display_direct(original_stimulus, comparison_stimulus)
+	end
 	data.response(current_run) = get_response('which stimulus is brighter (1/2) ?')
 	
 	% wait for ITI
